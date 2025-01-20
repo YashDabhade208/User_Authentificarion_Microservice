@@ -14,12 +14,12 @@ const register = async (user,req,res) => {
         let hashedPassword;
 
         if (password) {
-            // Hash the password with a salt (default is 10 rounds)
+            
             const salt = await bcrypt.genSalt(10);
             hashedPassword = await bcrypt.hash(password, salt);
         } else {
-            // Use a placeholder or null for users without a password
-            hashedPassword = null; // or use a placeholder value like 'OAUTH_USER'
+           
+            hashedPassword = null; 
         }
         const [userResults] = await connection.query(checkusersql, [email]);
         if (userResults.length > 0) {
@@ -28,7 +28,7 @@ const register = async (user,req,res) => {
 
         const [result] = await connection.query(sql, [name, email, hashedPassword]);
         const userId = result.insertId;
-        const initialBalance = 10000;
+        const initialBalance = 10000000;
         
        const walletResult= await createWalletForUser(userId, initialBalance);
        console.log(walletResult);
@@ -53,7 +53,7 @@ const createWalletForUser = async (userId) => {
   `;
 
   try {
-    const response = await axios.post('http://localhost:3001/graphql', {
+    const response = await axios.post('https://wallet-microservice-w39s.onrender.com/graphql', {
       query: mutation,
     });
     console.log('Wallet created:', response.data.data.createWallet);

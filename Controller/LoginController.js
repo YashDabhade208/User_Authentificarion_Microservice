@@ -22,7 +22,7 @@ const Login = async (req, res) => {
           { expiresIn: '1h' } // Token expires in 1 hour
         );
 
-        return res.status(200).json({ message: "Logged in", token, result });
+        return res.status(200).json({ message: "Logged in", token, result});
       } else {
         throw new Error("Invalid credentials for custom login");
       }

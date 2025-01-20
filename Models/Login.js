@@ -23,7 +23,7 @@ const login = async (user) => {
   
   
       if (isPasswordValid) {
-        return { status: 200, message: "Logged in successfully", user: fetchedUser };
+        return { status: 200, message: "Logged in successfully", user: fetchedUser};
       } else {
         return { status: 401, message: "Incorrect password" };
       }
